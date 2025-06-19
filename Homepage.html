@@ -1,0 +1,147 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cleanedge</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">Cleanedge</div>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <a href="browse.html">
+  <button style="background-color: green; color: white;">Browse Cleaners</button>
+</a>
+
+<a href="cleaners.html">
+  <button style="background-color: teal; color: white;">Cleaners</button>
+</a>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="overlay">
+      <h1>Find trusted cleaners for your Home and office</h1>
+      <div class="buttons">
+        <a href="browse.html">
+  <button style="background-color: green; color: white;">Browse Cleaner</button>
+</a>
+
+<a href="cleaners.html">
+  <button style="background-color: teal; color: white;">Cleaner</button>
+</a>
+      </div>
+    </div>
+  </section>
+<!-- How We Work Section -->
+<section class="how-we-work">
+  <h2>How we work</h2>
+  <div class="steps">
+    <div class="step">
+      <img src="icons/browse.png" alt="Browse Icon">
+      <h3>Browse Cleaners</h3>
+      <p>Find the right match.</p>
+    </div>
+    <div class="step">
+      <img src="icons/phone.png" alt="Contact Icon">
+      <h3>Contact us</h3>
+      <p>Submit your request</p>
+    </div>
+    <div class="step">
+      <img src="icons/connected-user.png" alt="Connect Icon">
+      <h3>Get Connected</h3>
+      <p>We link you to your cleaner</p>
+    </div>
+  </div>
+</section>
+<!-- Why Choose Us Section -->
+<section class="why-choose-us">
+  <h2>Why Choose Us</h2>
+  <div class="features">
+    <div class="feature">
+      <img src="icons/verify.png" alt="Verified Cleaners">
+      <h3>Verified Cleaners</h3>
+      <p>All professionals are background checked</p>
+    </div>
+    <div class="feature">
+      <img src="icons/secured.png" alt="Safe and Reliable">
+      <h3>Safe & Reliable</h3>
+      <p>Your safety and satisfaction are our priorities</p>
+    </div>
+    <div class="feature">
+      <img src="icons/flash.png" alt="Quick Matching">
+      <h3>Quick Matching</h3>
+      <p>We connect you with cleaners fast</p>
+    </div>
+    <div class="feature">
+      <img src="icons/premium-quality.png" alt="Quality Guaranteed">
+      <h3>Quality Guaranteed</h3>
+      <p>We ensure high standards of service</p>
+    </div>
+  </div>
+</section>
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-about">
+      <h3>About US</h3>
+      <p>We connect clients with trusted,<br>vetted cleaners for home & office</p>
+    </div>
+    <div class="footer-links">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Browse Cleaners</a></li>
+        <li><a href="#"> Cleaner</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-contact">
+      <h3>Contact Us</h3>
+      <p><span>📧</span> joykanyago@gmail.com</p>
+      <p><span>📞</span> +1(437)667-5385</p>
+      <p><span>📍</span> Toronto, Canada</p>
+    </div>
+    <div class="footer-hours">
+      <h3>Opening Hours</h3>
+      <p>Mon – Fri: 8:00 AM – 7:00 PM</p>
+      <p>Saturday: 8:00 AM – 6:00 PM</p>
+      <p>Sunday: Closed</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>Copyright © 2025 Cleanedge</p>
+  </div>
+  <!-- Scroll to Top Button -->
+<button id="scrollTopBtn" title="Go to top">↑</button>
+</footer>
+</body>
+<script>
+  // Get the button
+  const scrollBtn = document.getElementById("scrollTopBtn");
+
+  // Show button after scrolling down 300px
+  window.onscroll = function () {
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+      scrollBtn.style.display = "block";
+    } else {
+      scrollBtn.style.display = "none";
+    }
+  };
+
+  // When the button is clicked, scroll to the top smoothly
+  scrollBtn.onclick = function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+</script>
+
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Panel - Approve Cleaners</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      background: #f2f2f2;
+    }
+    .cleaner {
+      background: #fff;
+      margin-bottom: 20px;
+      padding: 20px;
+      border-left: 5px solid orange;
+    }
+    button {
+      margin-right: 10px;
+      padding: 5px 10px;
+      border: none;
+      cursor: pointer;
+    }
+    .approve {
+      background-color: green;
+      color: white;
+    }
+    .reject {
+      background-color: red;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Pending Cleaner Applications</h1>
+  <div id="cleaners"></div>
+
+  <hr />
+
+  <h1>Client Requests for Cleaners</h1>
+  <div id="requests"></div>
+
+  <script>
+    const cleanersContainer = document.getElementById('cleaners');
+    const requestsContainer = document.getElementById('requests');
+
+    const supabaseUrl = 'https://ekvpxbdxfnvybxyoevrv.supabase.co';
+    const apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVrdnB4YmR4Zm52eWJ4eW9ldnJ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg4NDEwMjEsImV4cCI6MjA2NDQxNzAyMX0.oR90K3wdG5SB0zU76PDCqwEj3P_gscwEJGuDK17sUYw';
+
+    async function fetchPendingCleaners() {
+      const res = await fetch(`${supabaseUrl}/rest/v1/cleaners?status=eq.pending`, {
+        headers: {
+          'apikey': apiKey,
+          'Authorization': `Bearer ${apiKey}`
+        }
+      });
+
+      const cleaners = await res.json();
+      cleanersContainer.innerHTML = '';
+
+      cleaners.forEach(cleaner => {
+        const div = document.createElement('div');
+        div.className = 'cleaner';
+        div.innerHTML = `
+          <strong>${cleaner.name}</strong><br>
+          ${cleaner.email}<br>
+          ${cleaner.phone}<br>
+          ${cleaner.location}<br><br>
+          ${cleaner.bio}<br><br>
+          <button class="approve" onclick="updateStatus('${cleaner.id}', 'approved')">Approve</button>
+          <button class="reject" onclick="updateStatus('${cleaner.id}', 'rejected')">Reject</button>
+        `;
+        cleanersContainer.appendChild(div);
+      });
+    }
+
+    async function updateStatus(id, status) {
+      const res = await fetch(`${supabaseUrl}/rest/v1/cleaners?id=eq.${id}`, {
+        method: 'PATCH',
+        headers: {
+          'apikey': apiKey,
+          'Authorization': `Bearer ${apiKey}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ status })
+      });
+
+      if (res.ok) {
+        alert(`Cleaner has been ${status}.`);
+        fetchPendingCleaners();
+      } else {
+        alert('Error updating status.');
+      }
+    }
+
+    async function loadRequests() {
+      const res = await fetch(`${supabaseUrl}/rest/v1/requests?select=*,cleaners(*)`, {
+        headers: {
+          'apikey': apiKey,
+          'Authorization': `Bearer ${apiKey}`
+        }
+      });
+
+      const requests = await res.json();
+      requestsContainer.innerHTML = '';
+
+      if (requests.length === 0) {
+        requestsContainer.innerHTML = '<p>No client requests yet.</p>';
+        return;
+      }
+
+      requests.forEach(req => {
+        const div = document.createElement('div');
+        div.className = 'cleaner';
+        div.innerHTML = `
+          <p><strong>Client Email:</strong> ${req.client_email}</p>
+          <p><strong>Cleaner:</strong> ${req.cleaners.name}</p>
+          <p><strong>Cleaner Phone:</strong> ${req.cleaners.phone}</p>
+        `;
+        requestsContainer.appendChild(div);
+      });
+    }
+
+    fetchPendingCleaners();
+    loadRequests();
+  </script>
+</body>
+</html>
+
